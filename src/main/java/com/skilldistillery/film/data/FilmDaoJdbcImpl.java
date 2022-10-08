@@ -182,14 +182,14 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		conn.close();
 		return category;
 	}
-	
+
 	@Override
-	public List <String> findCategoriesById(int filmId) throws SQLException{
-		List <String> categoryList = new ArrayList<> ();
-		
+	public List<String> findCategoriesById(int filmId) throws SQLException {
+		List<String> categoryList = new ArrayList<>();
+
 		String user = "student";
 		String pass = "student";
-		
+
 		String newCategory;
 
 		Connection conn = DriverManager.getConnection(URL, user, pass);
@@ -200,7 +200,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, filmId);
 		ResultSet categoryResult = stmt.executeQuery();
-		
+
 		while (categoryResult.next()) {
 			newCategory = categoryResult.getString("category");
 		}
@@ -209,8 +209,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		stmt.close();
 		conn.close();
 		return categoryList;
-		
-		
+
 	}
 
 	@Override
@@ -236,7 +235,6 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			stmt.setInt(7, film.getLength());
 			stmt.setDouble(8, film.getReplacementCost());
 			stmt.setString(9, film.getRating());
-			
 
 			int updateCount = stmt.executeUpdate();
 
@@ -268,8 +266,28 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 	@Override
 	public boolean deleteFilm(Film film) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false); // START TRANSACTION
+			String sql = "DELETE FROM film WHERE id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, film.getId());
+			int updateCount = stmt.executeUpdate();
+
+			conn.commit(); // COMMIT TRANSACTION
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException sqle2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -300,14 +318,12 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 			int updateCount = stmt.executeUpdate();
 
-			 
-				ResultSet keys = stmt.getGeneratedKeys();
-				while (keys.next()) {
-					System.out.println("Updated film's Id:" + keys.getInt(1));	
-					
-				}
-			
-			
+			ResultSet keys = stmt.getGeneratedKeys();
+			while (keys.next()) {
+				System.out.println("Updated film's Id:" + keys.getInt(1));
+
+			}
+
 			conn.commit(); // COMMIT TRANSACTION
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
