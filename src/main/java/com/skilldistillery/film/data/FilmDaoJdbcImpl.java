@@ -159,6 +159,32 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	}
 
 	@Override
+	public String getCategoryById(int filmId) throws SQLException {
+		String category = null;
+		String user = "student";
+		String pass = "student";
+
+		Connection conn = DriverManager.getConnection(URL, user, pass);
+		String sql = "SELECT name \"category\"       \n"
+				+ "      FROM category JOIN film_category fc ON category.id = fc.category_id           \n"
+				+ "                 JOIN film ON fc.film_id = film.id                      \n"
+				+ "                 WHERE film_id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, filmId);
+		ResultSet categoryResult = stmt.executeQuery();
+
+		while (categoryResult.next()) {
+			category = new String(categoryResult.getString("category"));
+		}
+		categoryResult.close();
+		stmt.close();
+		conn.close();
+		return category;
+	}
+	
+	
+	
+	@Override
 	public Film createFilm(Film film) {
 		String user = "student";
 		String pass = "student";
@@ -214,5 +240,6 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
