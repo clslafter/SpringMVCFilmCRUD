@@ -23,13 +23,13 @@ ${film.title } was added successfully.
 	<br>
 	<br>
 	<br>
+	<form action="searchFilmId.do" method="GET">
+		<input type="hidden" name="id" value="${film.id }" /> <input
+			type="submit" value="Show your films details" />
+	</form>
 	<br>
 	<a href="index.html">Homepage</a>
 	<br>
-	<form action="filmDisplay.do" method="GET">
-		<input type="text" name="id" value="Film ID" /> <input type="submit"
-			value="View Film Details" /> <-- this part needs work -->
-	</form>
 </body>
 </html>
 
