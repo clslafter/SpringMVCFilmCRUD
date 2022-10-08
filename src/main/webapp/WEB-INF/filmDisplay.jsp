@@ -20,9 +20,9 @@
 	<br> Length ${film.length }
 	<br> Replacement Cost ${film.replacementCost }
 	<br> Rating ${film.rating }
-	<br> Special Features ${film.specialFeatures }
-	<br> List of Actors ${film.listOfActors }
-	<br> Categories ${film.Categories }
+	<%-- <br> Special Features ${film.specialFeatures } --%>
+	<%-- <br> List of Actors ${film.listOfActors } --%>
+	<%-- <br> Categories ${film.categories } --%>
 	<br>
 <a href="index.html">Homepage</a><br>
 </body>

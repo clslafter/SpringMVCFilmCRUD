@@ -61,7 +61,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	}
 
 	@Override
-	public Actor findActorById(int actorId) throws SQLException{
+	public Actor findActorById(int actorId) throws SQLException {
 		Actor actor = null;
 		String user = "student";
 		String pass = "student";
@@ -181,9 +181,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		conn.close();
 		return category;
 	}
-	
-	
-	
+
 	@Override
 	public Film createFilm(Film film) {
 		String user = "student";
@@ -236,10 +234,55 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	}
 
 	@Override
-	public Film updateFilm(int filmId, Film obj) {
-		// TODO Auto-generated method stub
-		return null;
+	public Film updateFilm(Film film) {
+		String user = "student";
+		String pass = "student";
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, user, pass);
+
+			conn.setAutoCommit(false); // START TRANSACTION
+
+			String sql = "UPDATE film SET title = ?, description = ?, release_year = ?, "
+					+ "language_id = ?, rental_duration = ?, rental_rate = ?, length = ?, "
+					+ "replacement_cost = ?, rating = ? WHERE id = ?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, film.getTitle());
+			stmt.setString(2, film.getDescription());
+			stmt.setInt(3, film.getReleaseYear());
+			stmt.setInt(4, film.getLanguageId());
+			stmt.setInt(5, film.getRentalDuration());
+			stmt.setDouble(6, film.getRentalRate());
+			stmt.setInt(6, film.getLength());
+			stmt.setDouble(7, film.getReplacementCost());
+			stmt.setString(8, film.getRating());
+			stmt.setInt(9, film.getId());
+
+			int updateCount = stmt.executeUpdate();
+
+			 
+				ResultSet keys = stmt.getGeneratedKeys();
+				while (keys.next()) {
+					System.out.println("Updated film's Id:" + keys.getInt(1));	
+					
+				}
+			
+			
+			conn.commit(); // COMMIT TRANSACTION
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			film = null;
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException sqle2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
+			throw new RuntimeException("Error updating film " + film);
+		}
+
+		return film;
 	}
-
-
 }

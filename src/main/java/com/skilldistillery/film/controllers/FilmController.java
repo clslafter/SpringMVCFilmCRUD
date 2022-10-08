@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -72,5 +73,25 @@ public class FilmController {
 		return mv;
 	}
 //	@RequestMapping(path="")
+	
+	@RequestMapping(path = "modifyFilm.do", method = RequestMethod.POST)
+	public ModelAndView modifyFilm(@RequestParam("id") int id, Film film, RedirectAttributes redir) throws SQLException {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(film);
+		film.setId(id);
+		System.out.println(film.getId());
+		
+		Film updatedFilm = filmDao.updateFilm(film);
+		
+		redir.addFlashAttribute("film", updatedFilm);
+		mv.setViewName("redirect:filmDisplay.do");
+		if (updatedFilm == null) {
+			updatedFilm = new Film();
+			updatedFilm.setId(-1);
+		}
+		return mv;
+	}
+	
+
 
 }

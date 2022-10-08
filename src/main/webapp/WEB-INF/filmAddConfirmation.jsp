@@ -12,17 +12,24 @@
 <body>
 	<h2>Film Add Confirmation</h2>
 
-	  <c:choose>
-		 <c:when test="${empty film}">
+	<c:choose>
+		<c:when test="${empty film}">
 Your film could not be added. Please try again.
          </c:when>
-	<c:otherwise>
+		<c:otherwise>
 ${film.title } was added successfully.
 </c:otherwise>
-	  </c:choose>
-	<br><br><br><br>
-	<a href="index.html">Homepage</a><br>
-	<a href="filmDetails.jsp">Film Details</a> <-- this part needs work -->
+	</c:choose>
+	<br>
+	<br>
+	<br>
+	<br>
+	<a href="index.html">Homepage</a>
+	<br>
+	<form action="filmDisplay.do" method="GET">
+		<input type="text" name="id" value="Film ID" /> <input type="submit"
+			value="View Film Details" /> <-- this part needs work -->
+	</form>
 </body>
 </html>
 
