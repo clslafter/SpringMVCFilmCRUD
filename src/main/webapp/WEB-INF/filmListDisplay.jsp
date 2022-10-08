@@ -15,6 +15,10 @@
 		<tr>
 		<td>${film.id }</td>
 		<td>${film.title }</td>
+		<td><form action="searchFilmId.do" method="GET">
+		<input type="hidden" name="id" value="${film.id }" /> <input
+			type="submit" value="See films details" />
+	</form></td>
 		</tr>
 		</c:forEach>
 </table>
