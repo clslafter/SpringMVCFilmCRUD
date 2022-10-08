@@ -9,8 +9,13 @@
 <title>Film Display</title>
 </head>
 <body>
-	<h1>Film search by ID result:</h1>
-	<br> ID: ${film.id }
+	<c:choose>
+		<c:when test="${empty film }">
+			<p>Your film could not be found, please try again.</p>
+		</c:when>
+		<c:otherwise>
+			<h1>Film search by ID result:</h1>
+			<br> ID: ${film.id }
 	<br> Title: ${film.title }
 	<br> Description: ${film.description }
 	<br> Release Year: ${film.releaseYear }
@@ -21,23 +26,17 @@
 	<br> Replacement Cost: ${film.replacementCost }
 	<br> Rating: ${film.rating }
 	<br> Special Features: ${film.specialFeatures }
-
 	<br> Categories: ${film.categories }
-<%-- 	<c:forEach var="categories" items="${film.categories}">
-		<c:out value="${film.categories }" />
-	</c:forEach> --%>
-
 	<br> List of Actors: ${film.actors }
-<%-- 	<c:forEach var="actors" items="${film.actors}">
-		<c:out value="${film.actors }" />
-	</c:forEach> --%>
 	<br>
 	<br>
 	<br>
-	<form action="modifyOrDelete.do" method="POST">
-		<input type="number" hidden="true" name="film" value="${film }" /> <input
-			type="submit" value="Modify or Delete this film" />
-	</form>
+			<form action="modifyOrDelete.do" method="POST">
+				<input type="number" hidden="true" name="film" value="${film }" />
+				<input type="submit" value="Modify or Delete this film" />
+			</form>
+		</c:otherwise>
+	</c:choose>
 	<br>
 	<br>
 	<br>
