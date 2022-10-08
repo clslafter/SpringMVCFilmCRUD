@@ -46,7 +46,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 		while (filmResult.next()) {
 			film = new Film(filmResult.getInt("id"), filmResult.getString("title"), filmResult.getString("description"),
-					filmResult.getInt("release_year"), filmResult.getString("language_id"),
+					filmResult.getInt("release_year"), filmResult.getInt("language_id"),
 					filmResult.getInt("rental_duration"), filmResult.getDouble("rental_rate"),
 					filmResult.getInt("length"), filmResult.getDouble("replacement_cost"),
 					filmResult.getString("rating"), filmResult.getString("special_features"));
@@ -125,7 +125,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 		while (filmResult.next()) {
 			film = new Film(filmResult.getInt("id"), filmResult.getString("title"), filmResult.getString("description"),
-					filmResult.getInt("release_year"), filmResult.getString("language_id"),
+					filmResult.getInt("release_year"), filmResult.getInt("language_id"),
 					filmResult.getInt("rental_duration"), filmResult.getDouble("rental_rate"),
 					filmResult.getInt("length"), filmResult.getDouble("replacement_cost"),
 					filmResult.getString("rating"), filmResult.getString("special_features"));
@@ -168,12 +168,12 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 			conn.setAutoCommit(false); // START TRANSACTION
 
-			String sql = "INSERT INTO film (title, language_id, release_year) VALUES (?,?,?)";
+			String sql = "INSERT INTO film (title, language_id) VALUES (?,?)";
 
 			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, film.getTitle());
-			stmt.setString(2, film.getLanguage());
-			stmt.setInt(3, film.getReleaseYear());
+			stmt.setInt(2, film.getLanguageId());
+//			stmt.setInt(3, film.getReleaseYear());
 
 			int updateCount = stmt.executeUpdate();
 
@@ -197,7 +197,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 					System.err.println("Error trying to rollback");
 				}
 			}
-			throw new RuntimeException("Error inserting actor " + film);
+			throw new RuntimeException("Error inserting film " + film);
 		}
 
 		return film;

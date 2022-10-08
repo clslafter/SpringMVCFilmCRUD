@@ -37,7 +37,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		while (filmResult.next()) {
 			film = new Film(filmResult.getInt("id"), filmResult.getString("title"), filmResult.getString("description"),
-					filmResult.getInt("release_year"), filmResult.getString("language_id"),
+					filmResult.getInt("release_year"), filmResult.getInt("language_id"),
 					filmResult.getInt("rental_duration"), filmResult.getDouble("rental_rate"),
 					filmResult.getInt("length"), filmResult.getDouble("replacement_cost"),
 					filmResult.getString("rating"), filmResult.getString("special_features"));
@@ -116,7 +116,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		while (filmResult.next()) {
 			film = new Film(filmResult.getInt("id"), filmResult.getString("title"), filmResult.getString("description"),
-					filmResult.getInt("release_year"), filmResult.getString("language_id"),
+					filmResult.getInt("release_year"), filmResult.getInt("language_id"),
 					filmResult.getInt("rental_duration"), filmResult.getDouble("rental_rate"),
 					filmResult.getInt("length"), filmResult.getDouble("replacement_cost"),
 					filmResult.getString("rating"), filmResult.getString("special_features"));
