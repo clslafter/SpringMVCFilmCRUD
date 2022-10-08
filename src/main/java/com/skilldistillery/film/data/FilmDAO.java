@@ -21,6 +21,8 @@ public interface FilmDAO {
 	String getLanguageById(int filmId) throws SQLException;
 	
 	String getCategoryById(int filmId) throws SQLException;
+	
+	List <String> findCategoriesById(int filmId) throws SQLException;
 
 
 	

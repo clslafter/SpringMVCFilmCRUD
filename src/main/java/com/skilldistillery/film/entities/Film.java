@@ -18,7 +18,7 @@ public class Film {
 	private String rating;
 	private String specialFeatures;
 	private String language;
-	private String category;
+	private List <String> categories;
 
 	public String getLanguage() {
 		return language;
@@ -162,13 +162,14 @@ public class Film {
 	public void setSpecialFeatures(String specialFeatures) {
 		this.specialFeatures = specialFeatures;
 	}
+	
 
-	public String getCategory() {
-		return category;
+	public List<String> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
 	}
 
 	@Override

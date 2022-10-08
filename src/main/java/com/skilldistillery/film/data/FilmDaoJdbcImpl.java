@@ -52,7 +52,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 					filmResult.getString("rating"), filmResult.getString("special_features"));
 			film.setActors(findActorsByFilmId(filmResult.getInt("id")));
 			film.setLanguage(getLanguageById(filmResult.getInt("id")));
-			film.setCategory(getCategoryById(filmResult.getInt("id")));
+			film.setCategories(findCategoriesById(filmResult.getInt("id")));
 		}
 
 		filmResult.close();
@@ -181,6 +181,36 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		stmt.close();
 		conn.close();
 		return category;
+	}
+	
+	@Override
+	public List <String> findCategoriesById(int filmId) throws SQLException{
+		List <String> categoryList = new ArrayList<> ();
+		
+		String user = "student";
+		String pass = "student";
+		
+		String newCategory;
+
+		Connection conn = DriverManager.getConnection(URL, user, pass);
+		String sql = "SELECT name \"category\"       \n"
+				+ "      FROM category JOIN film_category fc ON category.id = fc.category_id           \n"
+				+ "                 JOIN film ON fc.film_id = film.id                      \n"
+				+ "                 WHERE film_id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, filmId);
+		ResultSet categoryResult = stmt.executeQuery();
+		
+		while (categoryResult.next()) {
+			newCategory = categoryResult.getString("category");
+		}
+
+		categoryResult.close();
+		stmt.close();
+		conn.close();
+		return categoryList;
+		
+		
 	}
 
 	@Override
