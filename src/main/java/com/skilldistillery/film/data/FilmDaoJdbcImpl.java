@@ -193,16 +193,17 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		String newCategory;
 
 		Connection conn = DriverManager.getConnection(URL, user, pass);
-		String sql = "SELECT name \"category\"       \n"
-				+ "      FROM category JOIN film_category fc ON category.id = fc.category_id           \n"
-				+ "                 JOIN film ON fc.film_id = film.id                      \n"
+		String sql = "SELECT name"
+				+ "      FROM category JOIN film_category fc ON category.id = fc.category_id"
+				+ "                 JOIN film ON fc.film_id = film.id"
 				+ "                 WHERE film_id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, filmId);
 		ResultSet categoryResult = stmt.executeQuery();
 
 		while (categoryResult.next()) {
-			newCategory = categoryResult.getString("category");
+			newCategory = categoryResult.getString("name");
+			categoryList.add(newCategory);
 		}
 
 		categoryResult.close();
