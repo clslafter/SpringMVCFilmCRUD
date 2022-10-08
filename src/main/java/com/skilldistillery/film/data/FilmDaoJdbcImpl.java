@@ -54,7 +54,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 //				If found, makes new film object and returns it
 				if (rs.next()) {
 					film = new Film(rs.getInt("id"), rs.getString("title"), rs.getString("description"),
-							rs.getInt("release_year"), rs.getInt("language_id"), rs.getInt("rental_duration"),
+							rs.getInt("release_year"), rs.getString("language_id"), rs.getInt("rental_duration"),
 							rs.getDouble("rental_rate"), rs.getInt("length"), rs.getDouble("replacement_cost"),
 							rs.getString("rating"), rs.getString("special_features"));
 
