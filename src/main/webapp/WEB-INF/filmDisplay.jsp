@@ -20,14 +20,28 @@
 	<br> Length: ${film.length }
 	<br> Replacement Cost: ${film.replacementCost }
 	<br> Rating: ${film.rating }
-	<br> Special Features: ${film.specialFeatures } 
-<%-- 	These need to be for each looped <br> Categories: ${film.category } --%>
-	<%-- <br> List of Actors ${film.listOfActors } --%>
-	<br><br><br>
+	<br> Special Features: ${film.specialFeatures }
+
+	<br> Categories: ${film.categories }
+<%-- 	<c:forEach var="categories" items="${film.categories}">
+		<c:out value="${film.categories }" />
+	</c:forEach> --%>
+
+	<br> List of Actors: ${film.actors }
+<%-- 	<c:forEach var="actors" items="${film.actors}">
+		<c:out value="${film.actors }" />
+	</c:forEach> --%>
+	<br>
+	<br>
+	<br>
 	<form action="modifyOrDelete.do" method="POST">
 		<input type="number" hidden="true" name="film" value="${film }" /> <input
 			type="submit" value="Modify or Delete this film" />
-	</form><br><br><br>
-<a href="index.html">Homepage</a><br>
+	</form>
+	<br>
+	<br>
+	<br>
+	<a href="index.html">Back to home</a>
+	<br>
 </body>
 </html>
