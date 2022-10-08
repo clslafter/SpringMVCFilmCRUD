@@ -25,7 +25,7 @@
 	<%-- <br> List of Actors ${film.listOfActors } --%>
 	<br><br><br>
 	<form action="modifyOrDelete.do" method="POST">
-		<input type="number" hidden="true" name="filmId" value="${film.id }" /> <input
+		<input type="number" hidden="true" name="film" value="${film }" /> <input
 			type="submit" value="Modify or Delete this film" />
 	</form><br><br><br>
 <a href="index.html">Homepage</a><br>

@@ -56,6 +56,14 @@ public class FilmController {
 		return mv;
 	}
 	
+	@RequestMapping(path = "modifyOrDelete.do", method = RequestMethod.POST)
+	public ModelAndView modify(Film film) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject( film);
+		mv.setViewName("modifyOrDelete");
+		return mv;
+	}
+	
 	
 	@RequestMapping(path = "searchFilmKeyword.do", method = RequestMethod.GET, params = "keyword")
 	public ModelAndView searchFilmKeyword(String keyword, RedirectAttributes redir) throws SQLException {
