@@ -1,5 +1,7 @@
 package com.skilldistillery.film.controllers;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,9 @@ public class FilmController {
 	
 	
 	@RequestMapping (path = "showFilm.do", method = RequestMethod.GET, params = "filmId")
-	public ModelAndView showFilm (Integer filmId) {
+	public ModelAndView showFilm (Integer filmId) throws SQLException {
 		ModelAndView mv = new ModelAndView();
-		Film film = filmDao.getFilmById(filmId);
+		Film film = filmDao.findFilmById(filmId);
 		mv.addObject("film", film);
 		mv.setViewName("film");
 		return mv;
