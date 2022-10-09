@@ -30,7 +30,7 @@ public class FilmController {
 			int length, 
 			double replacementCost, 
 			String rating, 
-			String specialFeatures, 
+//			String specialFeatures, 
 			RedirectAttributes redir) throws SQLException {
 		Film film = new Film();
 		film.setTitle(title);
@@ -42,7 +42,7 @@ public class FilmController {
 		film.setLength(length);
 		film.setReplacementCost(replacementCost);
 		film.setRating(rating);
-		film.setSpecialFeatures(specialFeatures);
+//		film.setSpecialFeatures(specialFeatures);
 		filmDao.createFilm(film);
 		ModelAndView mv = new ModelAndView();
 		redir.addFlashAttribute("film", film);
