@@ -249,12 +249,13 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 				film = null;
 			}
 			conn.commit(); // COMMIT TRANSACTION
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			film = null;
 			if (conn != null) {
 				try {
 					conn.rollback();
-				} catch (SQLException sqle2) {
+				} catch (Exception e2) {
 					System.err.println("Error trying to rollback");
 				}
 			}
@@ -325,17 +326,17 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			}
 
 			conn.commit(); // COMMIT TRANSACTION
-		} catch (Exception sqle) {
-			sqle.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 			film = null;
-//			if (conn != null) {
-//				try {
-//					conn.rollback();
-//				} catch (SQLException sqle2) {
-//					System.err.println("Error trying to rollback");
-//				}
-//			}
-//			throw new RuntimeException("Error updating film " + film);
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (Exception e2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
+			throw new RuntimeException("Error updating film " + film);
 		}
 
 		return film;
