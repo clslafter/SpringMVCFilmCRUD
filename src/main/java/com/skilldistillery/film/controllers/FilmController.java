@@ -20,11 +20,21 @@ public class FilmController {
 	@Autowired
 	private FilmDAO filmDao;
 
-	@RequestMapping(path = "addFilm.do", method = RequestMethod.POST, params = "title")
-	public ModelAndView addFilm(String title, RedirectAttributes redir) throws SQLException {
+	@RequestMapping(path = "addFilm.do", method = RequestMethod.POST)
+	public ModelAndView addFilm(String title, String description, int releaseYear,
+			int languageId, int rentalDuration, double rentalRate, int length, 
+			double replacementCost, String rating, String specialFeatures, RedirectAttributes redir) throws SQLException {
 		Film film = new Film();
 		film.setTitle(title);
-		film.setLanguageId(1);
+		film.setDescription(description);
+		film.setReleaseYear(releaseYear);
+		film.setLanguageId(languageId);
+		film.setRentalDuration(rentalDuration);
+		film.setRentalRate(rentalRate);
+		film.setLength(length);
+		film.setReplacementCost(replacementCost);
+		film.setRating(rating);
+		film.setSpecialFeatures(specialFeatures);
 		filmDao.createFilm(film);
 		ModelAndView mv = new ModelAndView();
 		redir.addFlashAttribute("film", film);
