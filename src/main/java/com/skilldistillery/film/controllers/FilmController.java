@@ -74,11 +74,13 @@ public class FilmController {
 		return mv;
 	}
 	
-	@RequestMapping(path = "modifyOrDelete.do", method = RequestMethod.POST)
-	public ModelAndView modify(Film film) {
+	@RequestMapping(path = "modifyOrDelete.do", method = RequestMethod.GET)
+	public ModelAndView modify(int id) throws SQLException {
 		ModelAndView mv = new ModelAndView();
+		Film film = filmDao.findFilmById(id);
 		mv.addObject( film);
 		mv.setViewName("modifyOrDelete");
+	
 		return mv;
 	}
 	
@@ -110,14 +112,37 @@ public class FilmController {
 		Film updatedFilm = filmDao.updateFilm(film);
 		
 		redir.addFlashAttribute("film", updatedFilm);
-		mv.setViewName("redirect:filmDisplay.do");
-		if (updatedFilm == null) {
-			updatedFilm = new Film();
-			updatedFilm.setId(-1);
-		}
+		mv.setViewName("redirect:filmModifyConfirmation.do");
+//		if (updatedFilm == null) {
+//			updatedFilm = new Film();
+//			updatedFilm.setId(-1);
+//		}
 		return mv;
 	}
 	
+	@RequestMapping(path = "filmModifyConfirmation.do", method = RequestMethod.GET)
+	public ModelAndView modifyConfirmRedirect(Film film) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("filmModifyConfirmation");
+		return mv;
+	}
+	
+	@RequestMapping(path = "deleteFilm.do", method = RequestMethod.POST, params = "id")
+	public ModelAndView deleteFilm(int id, RedirectAttributes redir) throws SQLException {
+		Film film = filmDao.findFilmById(id);
+		boolean deleteTest = filmDao.deleteFilm(film);
+		ModelAndView mv = new ModelAndView();
+		redir.addFlashAttribute("deleteTest", deleteTest);
+		mv.setViewName("redirect:filmDeleteConfirmation.do");
+		return mv;
+	}
+	
+	@RequestMapping(path = "filmDeleteConfirmation.do", method = RequestMethod.GET)
+	public ModelAndView redirectDeleteConfirmation(Film film) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("filmDeleteConfirmation");
+		return mv;
+	}
 
 
 }
