@@ -21,9 +21,17 @@ public class FilmController {
 	private FilmDAO filmDao;
 
 	@RequestMapping(path = "addFilm.do", method = RequestMethod.POST)
-	public ModelAndView addFilm(String title, String description, int releaseYear,
-			int languageId, int rentalDuration, double rentalRate, int length, 
-			double replacementCost, String rating, String specialFeatures, RedirectAttributes redir) throws SQLException {
+	public ModelAndView addFilm(String title, 
+			String description, 
+			int releaseYear,
+			int languageId, 
+			int rentalDuration, 
+			double rentalRate, 
+			int length, 
+			double replacementCost, 
+			String rating, 
+			String specialFeatures, 
+			RedirectAttributes redir) throws SQLException {
 		Film film = new Film();
 		film.setTitle(title);
 		film.setDescription(description);
