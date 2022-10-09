@@ -32,7 +32,7 @@
 	<br>
 	<br>
 			<form action="modifyOrDelete.do" method="POST">
-				<input type="number" hidden="true" name="film" value="${film }" />
+				<input type="number" hidden="true" name="id" value="${film.id }" />
 				<input type="submit" value="Modify or Delete this film" />
 			</form>
 		</c:otherwise>
