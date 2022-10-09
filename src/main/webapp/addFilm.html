@@ -6,19 +6,28 @@
 </head>
 <body>
 <h2>Add a Film</h2>
-<p> Please input a film title:<p><br>
-<form  action="addFilm.do" method="POST">
 
-
- 
+	<form  action="addFilm.do" method="POST">
     <br>Title: <input type="text" name="title" value="Title"/> 
 	<br> Description: <input type="text" name="description" value="Description"/> 
-	<br> Release Year: <input type="text" name="releaseYear" value="1999"/>
-	<br> Language ID: <input type="text" name="languageId" value="1"/>
-	<br> Rental Duration: <input type="text" name="rentalDuration" value="3"/> days
-	<br> Rental Rate: $<input type="text" name="rentalRate" value="4.99"/> 
-	<br> Length: <input type="text" name="length" value="90"/>
-	<br> Replacement Cost: $<input type="text" name="replacementCost" value="19.99"/>
+	<br> Release Year: <input type="number" name="releaseYear" value="1999"/>
+	<!-- <br> Language ID: <input type="number" name="languageId" value="1"/> -->
+	<br> Language:<br> <input type="radio" id="languageId" name="languageId" value="1"/>
+	<label for="1">English</label><br>
+	<input type="radio" id="languageId" name="languageId" value="2"/>
+	<label for="2">Italian</label><br>
+	<input type="radio" id="languageId" name="languageId" value="3"/>
+	<label for="3">Japanese</label><br>
+	<input type="radio" id="languageId" name="languageId" value="4"/>
+	<label for="4">Mandarin</label><br>
+	<input type="radio" id="languageId" name="languageId" value="5"/>
+	<label for="5">French</label><br>
+	<input type="radio" id="languageId" name="languageId" value="6"/>
+	<label for="6">German</label><br>
+	<br> Rental Duration: <input type="number" name="rentalDuration" value="3"/> days
+	<br> Rental Rate: $<input type="number" name="rentalRate" value="4.99"/> 
+	<br> Length: <input type="number" name="length" value="90"/>
+	<br> Replacement Cost: $<input type="number" name="replacementCost" value="19.99"/>
 	<br> Rating:<br> <input type="radio" id="rating" name="rating" value="G"/>
 	<label for="G">G</label><br>
 	<input type="radio" id="rating" name="rating" value="PG"/>
@@ -28,17 +37,8 @@
 	<input type="radio" id="rating" name="rating" value="R"/>
 	<label for="R">R</label><br>
 	<input type="radio" id="rating" name="rating" value="NC17"/>
-	<label for="NC17">NC17</label><br>
-	
-	<br> Special Features: <br> <input type="checkbox" id="specialFeatures" name="specialFeatures" value="Trailers"/>
-	<label for="Trailers">Trailers</label>
-	<br> <input type="checkbox" id="specialFeatures" name="specialFeatures" value="Commentaries/>
-	<label for="Commentaries">Commentaries</label>
-	<br> <input type="checkbox" id="specialFeatures" name="specialFeatures" value="Deleted Scenes"/>
-	<label for="Deleted Scenes">Deleted Scenes</label>
-	<br> <input type="checkbox" id="specialFeatures" name="specialFeatures" value="Behind the Scenes"/>
-	<label for="Behind the Scenes">Behind the Scenes</label>
-	<br><br><br> <input type="submit" value="Submit" />
+	<label for="NC17">NC17</label><br><br><br>
+		<input type="submit" value="Create this Film" />
 
 
 
